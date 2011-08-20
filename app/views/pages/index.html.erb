@@ -1,0 +1,106 @@
+<% content_for :head do %>
+<script src="http://js.pusherapp.com/1.8/pusher.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+  // Enable pusher logging - don't include this in production
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) window.console.log(message);
+  };
+
+  // Flash fallback logging - don't include this in production
+  WEB_SOCKET_DEBUG = true;
+
+  var pusher = new Pusher('xxxxx');
+  var channel = pusher.subscribe('main');
+
+  channel.bind('tweet', function(data) {
+    var elem = $("<li><img align='left' width='50' src=\'"+ data.avatar_url +"\'>"+ data.tweet +" </li>")
+    elem.hide().prependTo(".twitter ul").slideDown("slow")
+  });
+
+  channel.bind('irc', function(data) {
+    var elem = $("<li>"+ data.by +" : "+ data.message +"</li>")
+    elem.hide().prependTo(".message ul").slideDown("slow")
+  });
+
+  channel.bind('commit', function(data) {
+    var elem = $("<li>"+ data.message +"</li>")
+    elem.hide().prependTo(".commit ul").slideDown("slow")
+  });
+
+</script>
+<% end %>
+
+
+				
+				<% @teams.each do | team | %>
+							<table id='team<%= team.id %>' class='grid_1 teams'>
+									<% i = 0 %>
+									
+									<tr>
+											<% while i < 4 	%>
+												<% if i == 2%></tr><tr><% end %>
+												<td><% if !team.hackers[i].nil? %> <%= link_to gravatar_for(team.hackers[i]), team_path(team)%><% end %></td>
+											<%
+											i = i+1
+
+											end %>
+									</tr>
+							</table>
+
+				<% end %>
+			
+				
+		
+			</div>
+
+
+
+			
+			<div class='clear'>&nbsp;</div> 
+			
+			<div class='grid_2 bottombox twitter'> 
+			<p>
+				<ul>
+		<% @tweets.each do | tweet | %>
+		 <li><%= image_tag tweet.avatar_url, {:width => '50',:align =>'left' }	%> <%= tweet.body %></li>
+		<% end %></p>
+		</ul> 
+		<h2>Tweets - #leedshack</h2>
+			</div>
+			
+			<div class='grid_2 bottombox commit'> 
+			<p>
+					<ul>
+		<% @commits.each do | commit | %>
+		 <li><%= commit.message %></li>
+		<% end %></p> 
+			</ul>
+			<h2>Latest Commits</h2>
+			</div>
+			
+			<div class='grid_2 bottombox message'> 
+					<p>
+							<ul>
+				<% @ircs.each do | irc | %>
+				 <li><%= irc.by %> : <%= irc.message %></li>
+				<% end %>
+				</ul></p>
+				
+				<h2>IRC - #leedshack</h2>
+			</div>
+			
+			<div class='grid_2 bottombox stats'> 
+			<p>	<div class="slideshow"> 
+					 <%= image_tag "affwin.png" %>
+					 <%= image_tag "ebuyer.png" %>
+					 <%= image_tag "esendex.png" %>
+				</div></p> 
+						<h2>Awesome Sponsors</h2>
+			</div>
+		
+	<div class='clear'>&nbsp;</div> 
+
+
+		
+		

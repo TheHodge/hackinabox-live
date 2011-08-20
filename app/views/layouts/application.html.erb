@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :all %>
+  <%= csrf_meta_tag %>
+
+<script type="text/javascript"> 
+$(document).ready(function() {
+    $('.slideshow').cycle({
+		fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+	});
+});
+</script>
+<style type="text/css"> 
+.slideshow { height: 232px; width: 232px; margin: auto }
+.slideshow img { padding: 15px; border: 1px solid #ccc; background-color: #eee; }
+</style>
+<link href='http://fonts.googleapis.com/css?family=Carme' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#time").countdown({
+		date: "aug 7, 2011 12:00",
+		onChange: function( event, timer ){
+		
+			/*
+				Tips:
+				
+				event.target is DOM Element
+				this is DOM element
+				$(this) is jQuery Element
+				timer is interval for countdown
+				
+				If a countdown should end early you could do:
+				
+				clearInterval( timer );
+				$(this).trigger('complete');
+			*/
+
+		},
+		onComplete: function( event ){
+		
+			$(this).html("Hacking is Over!");
+		},
+		leadingZero: true
+	});
+
+});
+</script>
+<script type="text/javascript">
+
+$('a[title]').qtip({ style: { name: 'cream', tip: true } })
+</script>
+<%= yield :head %>
+</head>
+<body>
+	<div class="container container_8">
+		<h2 class="grid_4">
+			LeedsHack 2 Live Dashboard
+		</h2>
+		<h2 class="grid_4">
+			<span id="time" class="time"></span><span id = "ttext" class="ttext"> Of Hacking Left</span>
+		</h2>
+			<div class='clear'>&nbsp;</div> 
+
+		<div class='grid_8'>
+		<%= yield %>
+
+</body>
+</html>
+

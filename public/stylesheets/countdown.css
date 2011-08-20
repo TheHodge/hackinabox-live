@@ -1,0 +1,21 @@
+
+span#time{
+color:#c21017;
+text-align:left;
+display:inline;
+width:40%;
+}
+
+span#time .cd-time{
+display:inline;
+text-align:left;
+color:#222222;
+font-size:0.8em;
+}
+
+span#ttext{
+text-align:left;
+display:inline;
+color:#222222;
+font-size:0.8em;
+}

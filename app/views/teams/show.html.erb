@@ -1,0 +1,16 @@
+	
+	<h1><%= @team.name %></h1>
+		<%= link_to "Back to Dashboard", root_path %>
+		<%= @team.description %>
+		<h2>Hackers</h2>
+		<% @team.hackers.each do |hacker| %>
+			<%= gravatar_for(hacker, :size => '50') %> <%= hacker.name %> <%= hacker.id %><br />
+			
+		<% end %>
+		<h2>Commits by These Team Members</h2>
+		<% @commits.each do |commit| %>
+			<%= gravatar_for(commit.hacker, :size => '50')%> 
+			<%= commit.hacker.name %> - <%= commit.message %> - <%= commit.created_at.strftime("%H:%M %d/%m/%Y") %><br />
+		<% end %>
+	
+</div>
