@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.2.17'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem "simple_form"
 gem "mysql2", "0.2.7"
